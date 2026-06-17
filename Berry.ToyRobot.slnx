@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/ToyRobot.App/">
+    <Project Path="ToyRobot.App/ToyRobot.App.csproj" />
+  </Folder>
+  <Folder Name="/ToyRobot.UnitTests/">
+    <Project Path="ToyRobot.UnitTests/ToyRobot.UnitTests.csproj" />
+  </Folder>
+</Solution>
