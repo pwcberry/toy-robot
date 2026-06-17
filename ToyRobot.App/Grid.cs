@@ -22,4 +22,6 @@ public class Grid
         Direction.West => x == 0,
         _ => throw new ArgumentOutOfRangeException(nameof(facing), $"Invalid direction: {facing}")
     };
+
+    public bool IsOutOfBounds(int x, int y) => (x < 0 || x >= Dimensions.Width) || (y < 0 || y >= Dimensions.Height);
 }

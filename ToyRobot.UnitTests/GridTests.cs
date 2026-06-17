@@ -83,4 +83,41 @@ public class GridTests
         // Assert
         Assert.False(result);
     }
+    
+    [Theory]
+    [InlineData(0,0)]
+    [InlineData(0,3)]
+    [InlineData(2,2)]
+    [InlineData(3,1)]
+    [InlineData(4,4)]
+    public void IsOutOfBounds_ReturnsFalse(int x, int y)
+    {
+        // Range
+        var grid = new Grid();
+        
+        // Act
+        var result = grid.IsOutOfBounds(x, y);
+        
+        // Assert
+        Assert.False(result);
+    }
+    
+    [Theory]
+    [InlineData(-1, 2)]
+    [InlineData(-1, -2)]
+    [InlineData(2, -1)]
+    [InlineData(5, 2)]
+    [InlineData(2, 5)]
+    [InlineData(6, 6)]
+    public void IsOutOfBounds_ReturnsTrue(int x, int y)
+    {
+        // Arrange
+        var grid = new Grid();
+
+        // Act
+        var result = grid.IsOutOfBounds(x, y);
+
+        // Assert
+        Assert.True(result);
+    }
 }
