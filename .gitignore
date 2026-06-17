@@ -60,3 +60,9 @@ nunit-*.xml
 .idea
 .vscode
 .vs
+*.DotSettings.user
+*.user
+
+# Mac
+.DS_Store
+
