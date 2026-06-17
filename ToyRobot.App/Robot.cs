@@ -57,4 +57,33 @@ public class Robot
             _ => Facing
         };
     }
+
+    /// <summary>
+    /// Move the robot by one grid position in the direction it is facing.
+    /// </summary>
+    /// <returns>True if the robot moved.</returns>
+    public bool Move()
+    {
+        if (Grid.IsFacingBoundary(Position.X, Position.Y, Facing))
+        {
+            return false;
+        }
+
+        var newPosition = Facing switch
+        {
+            Direction.North => new Position(Position.X, Position.Y + 1),
+            Direction.East => new Position(Position.X + 1, Position.Y),
+            Direction.South => new Position(Position.X, Position.Y - 1),
+            Direction.West => new Position(Position.X - 1, Position.Y),
+            _ => Position
+        };
+
+        if (newPosition.Equals(Position))
+        {
+            return false;
+        }
+        
+        Position = newPosition;
+        return true;
+    }
 }
