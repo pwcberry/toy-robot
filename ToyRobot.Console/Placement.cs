@@ -1,4 +1,4 @@
-namespace ToyRobot.App;
+namespace ToyRobot.Console;
 
 /// <summary>
 /// Represents the placement request for the robot on the table, including its X and Y coordinates and the direction it is facing.

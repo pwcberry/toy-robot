@@ -1,4 +1,4 @@
-﻿namespace ToyRobot.App;
+﻿namespace ToyRobot.Console;
 
 /// <summary>
 /// Represents the main controller for the toy robot application, responsible for processing user input commands, controlling the robot's actions, and managing the application's flow.

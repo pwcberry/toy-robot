@@ -17,13 +17,13 @@ I have added an example input file in `samples/example4.txt`. To run the applica
 of the following commands from the solution root directory:
 
 ```powershell
-Get-Content -Path .\samples\example4.txt | dotnet run --project .\ToyRobot.App\ToyRobot.App.csproj
+Get-Content -Path .\samples\example4.txt | dotnet run --project .\ToyRobot.Console\ToyRobot.Console.csproj
 ```
 
 Or on Linux/Mac:
 
 ```bash
-cat ./samples/example4.txt | dotnet run --project ./ToyRobot.App/ToyRobot.App.csproj
+cat ./samples/example4.txt | dotnet run --project ./ToyRobot.Console/ToyRobot.Console.csproj
 ```
 
 The result of the `REPORT` command is `0,0,EAST`.
@@ -32,7 +32,7 @@ It is also possible to run the application interactively from the console or CLI
 To do this, run the following command from the solution root directory:
 
 ```shell
-dotnet run --project .\ToyRobot.App\ToyRobot.App.csproj
+dotnet run --project .\ToyRobot.Console\ToyRobot.Console.csproj
 ```
 
 Then you can enter commands one at a time. Entering `QUIT` will exit the application.

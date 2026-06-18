@@ -1,4 +1,4 @@
-namespace ToyRobot.App;
+namespace ToyRobot.Console;
 
 /// <summary>
 /// Represents the position of the robot or other object on the table.

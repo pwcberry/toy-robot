@@ -1,4 +1,4 @@
-﻿using ToyRobot.App;
+﻿using ToyRobot.Console;
 
 TextReader input = Console.In;
 

@@ -1,4 +1,4 @@
-namespace ToyRobot.App;
+namespace ToyRobot.Console;
 
 public enum Command
 {

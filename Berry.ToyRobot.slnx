@@ -9,8 +9,8 @@
     <File Path="samples/example3.txt" />
     <File Path="samples\example4.txt" />
   </Folder>
-  <Folder Name="/ToyRobot.App/">
-    <Project Path="ToyRobot.App/ToyRobot.App.csproj" />
+  <Folder Name="/ToyRobot.Console/">
+    <Project Path="ToyRobot.Console\ToyRobot.Console.csproj" />
   </Folder>
   <Folder Name="/ToyRobot.UnitTests/">
     <Project Path="ToyRobot.UnitTests/ToyRobot.UnitTests.csproj" />

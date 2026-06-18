@@ -1,4 +1,4 @@
-namespace ToyRobot.App;
+namespace ToyRobot.Console;
 
 public readonly struct Dimensions(int width, int height) : IEquatable<Dimensions>
 {
