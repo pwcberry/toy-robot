@@ -1,16 +1,37 @@
 # GitHub Copilot Prompts
 
-Using the model Claude Haiku 4.5.
+Using the model Claude Haiku 4.5. The following section describes some of the prompts used, and
+the AI responses in the chat.
 
-## Agent Prompts
+# Prompt: `Add four tests for TurnRight method, similar to tests for TurnLeft method.`
 
-For the Dimensions struct, add equality methods.
+Let me examine the existing tests for the TurnLeft method to understand the pattern.
 
-Add four tests for TurnRight method, similar to tests for TurnLeft method.
+I don't see TurnLeft tests in this file. Let me search for them across the codebase.
 
-For the Position struct, add equality methods to implement the IEquitable<t> interface.</t>
+Found them! Let me read the RobotTests.cs file to see the TurnLeft test patterns.
 
-Add xunit tests for the Placement struct. Write the tests in the file PlacementTests.cs, locate in the ToyRobot.UnitTests projects.
+Let me check the Robot class to understand the TurnLeft and TurnRight implementations.
+
+Now I'll add four TurnRight tests following the same pattern. I'll create tests that properly place the robot facing each direction before testing TurnRight.
+
+Let me verify the changes were applied correctly:
+
+_Processing..._
+
+Perfect! Let me verify there are no compile errors:
+
+_Processing..._
+
+Done! I've successfully added four tests for the TurnRight method to the RobotTests.cs file. The tests are:
+
+1. TurnRight_FromNorth_FacesEast - Robot facing North rotates right to face East
+2. TurnRight_FromEast_FacesSouth - Robot facing East rotates right to face South
+3. TurnRight_FromSouth_FacesWest - Robot facing South rotates right to face West
+4. TurnRight_FromWest_FacesNorth - Robot facing West rotates right to face North
+
+Each test follows the same Arrange-Act-Assert pattern as the `TurnLeft` tests, properly initializing the robot with the 
+appropriate starting direction before calling `TurnRight()` and verifying the result. All tests compile without errors.
 
 # Prompt: `Generate unit tests for the InputParser class`.
 

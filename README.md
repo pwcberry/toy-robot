@@ -89,4 +89,4 @@ I did use AI to assist in writing some of the code, mostly to:
 * Write unit tests
 * To implement the methods defined in the interface of `IEquatable<T>`
 
-See the [Prompts document](./prompts.md) for more details of the Copilot interactions.
+See the [Prompts document](./Prompts.md) for more details of the Copilot interactions.
