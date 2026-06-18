@@ -1,13 +1,13 @@
 namespace ToyRobot.App;
 
-public class Grid
+public class Table
 {
-    public Grid()
+    public Table()
     {
         Dimensions = new Dimensions(5, 5);
     }
 
-    public Grid(int width, int height)
+    public Table(int width, int height)
     {
         Dimensions = new Dimensions(width, height);
     }

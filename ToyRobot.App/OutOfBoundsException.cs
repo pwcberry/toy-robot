@@ -6,7 +6,7 @@ public class OutOfBoundsException : ApplicationException
     {
     }
     
-    public OutOfBoundsException(int x, int y, int width, int height) : base($"Position ({x}, {y}) is out of bounds for grid of size {width}x{height}")
+    public OutOfBoundsException(int x, int y, int width, int height) : base($"Position ({x}, {y}) is out of bounds for table of size {width}x{height}")
     {
     }
 }

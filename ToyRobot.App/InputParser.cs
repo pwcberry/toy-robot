@@ -4,10 +4,10 @@ public class InputParser
 {
     public static RobotAction Parse(string input)
     {
-        var parts = input.Split(' ');
+        var parts = input.ToUpperInvariant().Split(' ');
         var arguments = parts[1];
 
-        var command = parts[0].ToUpper() switch
+        var command = parts[0] switch
         {
             "PLACE" => Command.Place,
             "MOVE" => Command.Move,

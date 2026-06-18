@@ -2,27 +2,27 @@
 
 namespace ToyRobot.UnitTests;
 
-public class GridTests
+public class TableTests
 {
     [Fact]
-    public void DefaultInstance_Is_5_by_5_Matrix()
+    public void DefaultInstance_Has_5x5_Dimensions()
     {
         // Arrange & Act
-        var grid = new Grid();
+        var table = new Table();
         
         // Assert
-        Assert.Equal(5, grid.Dimensions.Width);
-        Assert.Equal(5, grid.Dimensions.Height);
+        Assert.Equal(5, table.Dimensions.Width);
+        Assert.Equal(5, table.Dimensions.Height);
     }
     
     [Fact]
     public void IsFacingBoundary_North_ReturnsTrue()
     {
         // Arrange
-        var grid = new Grid();
+        var table = new Table();
         
         // Act
-        var result = grid.IsFacingBoundary(0, 4, Direction.North);
+        var result = table.IsFacingBoundary(0, 4, Direction.North);
         
         // Assert
         Assert.True(result);
@@ -32,10 +32,10 @@ public class GridTests
     public void IsFacingBoundary_East_ReturnsTrue()
     {
         // Arrange
-        var grid = new Grid();
+        var table = new Table();
         
         // Act
-        var result = grid.IsFacingBoundary(4, 0, Direction.East);
+        var result = table.IsFacingBoundary(4, 0, Direction.East);
         
         // Assert
         Assert.True(result);
@@ -45,10 +45,10 @@ public class GridTests
     public void IsFacingBoundary_South_ReturnsTrue()
     {
         // Arrange
-        var grid = new Grid();
+        var table = new Table();
         
         // Act
-        var result = grid.IsFacingBoundary(2, 0, Direction.South);
+        var result = table.IsFacingBoundary(2, 0, Direction.South);
         
         // Assert
         Assert.True(result);
@@ -58,10 +58,10 @@ public class GridTests
     public void IsFacingBoundary_West_ReturnsTrue()
     {
         // Arrange
-        var grid = new Grid();
+        var table = new Table();
         
         // Act
-        var result = grid.IsFacingBoundary(0, 2, Direction.West);
+        var result = table.IsFacingBoundary(0, 2, Direction.West);
         
         // Assert
         Assert.True(result);
@@ -75,10 +75,10 @@ public class GridTests
     public void IsFacingBoundary_FromCenter_ReturnsFalse(Direction facing)
     {
         // Arrange
-        var grid = new Grid();
+        var table = new Table();
         
         // Act
-        var result = grid.IsFacingBoundary(2, 2, facing);
+        var result = table.IsFacingBoundary(2, 2, facing);
         
         // Assert
         Assert.False(result);
@@ -93,10 +93,10 @@ public class GridTests
     public void IsOutOfBounds_ReturnsFalse(int x, int y)
     {
         // Range
-        var grid = new Grid();
+        var table = new Table();
         
         // Act
-        var result = grid.IsOutOfBounds(x, y);
+        var result = table.IsOutOfBounds(x, y);
         
         // Assert
         Assert.False(result);
@@ -112,10 +112,10 @@ public class GridTests
     public void IsOutOfBounds_ReturnsTrue(int x, int y)
     {
         // Arrange
-        var grid = new Grid();
+        var table = new Table();
 
         // Act
-        var result = grid.IsOutOfBounds(x, y);
+        var result = table.IsOutOfBounds(x, y);
 
         // Assert
         Assert.True(result);

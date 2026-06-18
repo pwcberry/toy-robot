@@ -8,10 +8,10 @@ public class RobotTests
     public void DefaultInstance_AtOrigin_FacingNorth()
     {
         // Arrange
-        var grid = new Grid();
+        var table = new Table();
 
         // Act
-        var robot = new Robot(grid);
+        var robot = new Robot(table);
 
         // Assert
         Assert.Equal(0, robot.Position.X);
@@ -29,10 +29,10 @@ public class RobotTests
     public void Constructor_Throws_WhenOutOfBounds(int x, int y)
     {
         // Arrange
-        var grid = new Grid();
+        var table = new Table();
 
         // Act
-        Assert.Throws<OutOfBoundsException>(() => new Robot(grid, new Position(x, y), Direction.North));
+        Assert.Throws<OutOfBoundsException>(() => new Robot(table, new Position(x, y), Direction.North));
     }
 
     [Theory]
@@ -43,8 +43,8 @@ public class RobotTests
     public void Place_InBounds_DoesNotThrow(int x, int y, Direction facing)
     {
         // Arrange
-        var grid = new Grid();
-        var robot = new Robot(grid);
+        var table = new Table();
+        var robot = new Robot(table);
 
         // Act
         robot.Place(x, y, facing);
@@ -63,8 +63,8 @@ public class RobotTests
     public void Place_OutOfBounds_Throws(int x, int y, Direction facing)
     {
         // Arrange
-        var grid = new Grid();
-        var robot = new Robot(grid);
+        var table = new Table();
+        var robot = new Robot(table);
 
         // Act
         Assert.Throws<OutOfBoundsException>(() => robot.Place(x, y, facing));
@@ -74,8 +74,8 @@ public class RobotTests
     public void TurnLeft_FromNorth_FacesWest()
     {
         // Arrange
-        var grid = new Grid();
-        var robot = new Robot(grid);
+        var table = new Table();
+        var robot = new Robot(table);
 
         // Act
         robot.TurnLeft();
@@ -88,8 +88,8 @@ public class RobotTests
     public void TurnLeft_FromWest_FacesSouth()
     {
         // Arrange
-        var grid = new Grid();
-        var robot = new Robot(grid, Position.Origin, Direction.West);
+        var table = new Table();
+        var robot = new Robot(table, Position.Origin, Direction.West);
 
         // Act
         robot.TurnLeft();
@@ -102,8 +102,8 @@ public class RobotTests
     public void TurnLeft_FromSouth_FacesEast()
     {
         // Arrange
-        var grid = new Grid();
-        var robot = new Robot(grid, Position.Origin, Direction.South);
+        var table = new Table();
+        var robot = new Robot(table, Position.Origin, Direction.South);
 
         // Act
         robot.TurnLeft();
@@ -116,8 +116,8 @@ public class RobotTests
     public void TurnLeft_FromEast_FacesNorth()
     {
         // Arrange
-        var grid = new Grid();
-        var robot = new Robot(grid, Position.Origin, Direction.East);
+        var table = new Table();
+        var robot = new Robot(table, Position.Origin, Direction.East);
 
         // Act
         robot.TurnLeft();
@@ -130,8 +130,8 @@ public class RobotTests
     public void TurnRight_FromNorth_FacesEast()
     {
         // Arrange
-        var grid = new Grid();
-        var robot = new Robot(grid, Position.Origin, Direction.North);
+        var table = new Table();
+        var robot = new Robot(table, Position.Origin, Direction.North);
 
         // Act
         robot.TurnRight();
@@ -144,8 +144,8 @@ public class RobotTests
     public void TurnRight_FromEast_FacesSouth()
     {
         // Arrange
-        var grid = new Grid();
-        var robot = new Robot(grid, Position.Origin, Direction.East);
+        var table = new Table();
+        var robot = new Robot(table, Position.Origin, Direction.East);
 
         // Act
         robot.TurnRight();
@@ -158,8 +158,8 @@ public class RobotTests
     public void TurnRight_FromSouth_FacesWest()
     {
         // Arrange
-        var grid = new Grid();
-        var robot = new Robot(grid, Position.Origin, Direction.South);
+        var table = new Table();
+        var robot = new Robot(table, Position.Origin, Direction.South);
 
         // Act
         robot.TurnRight();
@@ -172,8 +172,8 @@ public class RobotTests
     public void TurnRight_FromWest_FacesNorth()
     {
         // Arrange
-        var grid = new Grid();
-        var robot = new Robot(grid, Position.Origin, Direction.West);
+        var table = new Table();
+        var robot = new Robot(table, Position.Origin, Direction.West);
 
         // Act
         robot.TurnRight();
@@ -187,29 +187,15 @@ public class RobotTests
     [InlineData(0, 2, Direction.East)]
     [InlineData(2, 4, Direction.South)]
     [InlineData(4, 2, Direction.West)]
-    public void Move_AwayFromBoundary_IsSuccessful(int x, int y, Direction facing)
-    {
-        // Arrange
-        var grid = new Grid();
-        var robot = new Robot(grid, new Position(x, y), facing);
-
-        // Act
-        var result = robot.Move();
-
-        // Assert
-        Assert.True(result);
-    }
-
-    [Theory]
     [InlineData(2, 2, Direction.North)]
     [InlineData(1, 1, Direction.West)]
     [InlineData(3, 3, Direction.East)]
     [InlineData(3, 2, Direction.South)]
-    public void Move_AwayFromCenter_IsSuccessful(int x, int y, Direction facing)
+    public void Move_AwayFromBoundary_IsSuccessful(int x, int y, Direction facing)
     {
         // Arrange
-        var grid = new Grid();
-        var robot = new Robot(grid, new Position(x, y), facing);
+        var table = new Table();
+        var robot = new Robot(table, new Position(x, y), facing);
 
         // Act
         var result = robot.Move();
@@ -226,8 +212,8 @@ public class RobotTests
     public void Move_PastBoundary_IsFailure(int x, int y, Direction facing)
     {
         // Arrange
-        var grid = new Grid();
-        var robot = new Robot(grid, new Position(x, y), facing);
+        var table = new Table();
+        var robot = new Robot(table, new Position(x, y), facing);
 
         // Act
         var result = robot.Move();

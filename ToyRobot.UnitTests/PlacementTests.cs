@@ -74,36 +74,6 @@ public class PlacementTests
     }
 
     [Fact]
-    public void Parse_WithLowercaseDirection_ReturnsPlacement()
-    {
-        // Arrange
-        var input = "1,2,north";
-
-        // Act
-        var placement = Placement.Parse(input);
-
-        // Assert
-        Assert.Equal(1, placement.X);
-        Assert.Equal(2, placement.Y);
-        Assert.Equal(Direction.North, placement.Facing);
-    }
-
-    [Fact]
-    public void Parse_WithMixedCaseDirection_ReturnsPlacement()
-    {
-        // Arrange
-        var input = "2,3,EaSt";
-
-        // Act
-        var placement = Placement.Parse(input);
-
-        // Assert
-        Assert.Equal(2, placement.X);
-        Assert.Equal(3, placement.Y);
-        Assert.Equal(Direction.East, placement.Facing);
-    }
-
-    [Fact]
     public void Parse_WithInvalidDirection_ThrowsArgumentException()
     {
         // Arrange

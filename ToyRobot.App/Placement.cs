@@ -1,12 +1,18 @@
 namespace ToyRobot.App;
 
+/// <summary>
+/// Represents the placement of the robot on the table, including its X and Y coordinates and the direction it is facing.
+/// </summary>
+/// <param name="x">The X coordinate of the robot's position on the table.</param>
+/// <param name="y">The Y coordinate of the robot's position on the table.</param>
+/// <param name="facing">The direction the robot is facing.</param>
 public readonly struct Placement(int x, int y, Direction facing)
 {
     public int X => x;
     public int Y => y;
     public Direction Facing => facing;
     
-    public static readonly Placement Empty = new Placement(-1, -1, Direction.South);
+    public static readonly Placement Empty = new(-1, -1, Direction.South);
 
     public static Placement Parse(string inputs)
     {

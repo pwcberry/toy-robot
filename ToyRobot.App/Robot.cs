@@ -2,21 +2,21 @@ namespace ToyRobot.App;
 
 public class Robot
 {
-    public Grid Grid { get; private set; }
+    public Table Table { get; private set; }
     public Position Position { get; private set; }
     public Direction Facing { get; private set; }
 
-    public Robot(Grid grid) : this(grid, new Position(0, 0), Direction.North)
+    public Robot(Table table) : this(table, new Position(0, 0), Direction.North)
     {
     }
 
-    public Robot(Grid grid, Position position, Direction facing)
+    public Robot(Table table, Position position, Direction facing)
     {
-        Grid = grid;
+        Table = table;
 
-        if (grid.IsOutOfBounds(position.X, position.Y))
+        if (table.IsOutOfBounds(position.X, position.Y))
         {
-            throw new OutOfBoundsException(position.X, position.Y, grid.Dimensions.Width, grid.Dimensions.Height);
+            throw new OutOfBoundsException(position.X, position.Y, table.Dimensions.Width, table.Dimensions.Height);
         }
 
         Position = position;
@@ -25,9 +25,9 @@ public class Robot
 
     public void Place(int x, int y, Direction facing)
     {
-        if (Grid.IsOutOfBounds(x, y))
+        if (Table.IsOutOfBounds(x, y))
         {
-            throw new OutOfBoundsException(x, y, Grid.Dimensions.Width, Grid.Dimensions.Height);
+            throw new OutOfBoundsException(x, y, Table.Dimensions.Width, Table.Dimensions.Height);
         }
 
         Position = new Position(x, y);
@@ -59,12 +59,12 @@ public class Robot
     }
 
     /// <summary>
-    /// Move the robot by one grid position in the direction it is facing.
+    /// Move the robot by one table position in the direction it is facing.
     /// </summary>
     /// <returns>True if the robot moved.</returns>
     public bool Move()
     {
-        if (Grid.IsFacingBoundary(Position.X, Position.Y, Facing))
+        if (Table.IsFacingBoundary(Position.X, Position.Y, Facing))
         {
             return false;
         }
