@@ -1,11 +1,11 @@
 namespace ToyRobot.App;
 
-public class InputParser
+public static class InputParser
 {
     public static RobotAction Parse(string input)
     {
         var parts = input.ToUpperInvariant().Split(' ');
-        var arguments = parts[1];
+        var arguments = parts.Length > 1 ? parts[1] : string.Empty;
 
         var command = parts[0] switch
         {
