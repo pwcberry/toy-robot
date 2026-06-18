@@ -1,7 +1,7 @@
 namespace ToyRobot.App;
 
 /// <summary>
-/// Represents the placement of the robot on the table, including its X and Y coordinates and the direction it is facing.
+/// Represents the placement request for the robot on the table, including its X and Y coordinates and the direction it is facing.
 /// </summary>
 /// <param name="x">The X coordinate of the robot's position on the table.</param>
 /// <param name="y">The Y coordinate of the robot's position on the table.</param>

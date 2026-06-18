@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace ToyRobot.App;
 
 public class RobotAction

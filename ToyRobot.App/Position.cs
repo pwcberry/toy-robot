@@ -1,5 +1,10 @@
 namespace ToyRobot.App;
 
+/// <summary>
+/// Represents the position of the robot or other object on the table.
+/// </summary>
+/// <param name="x">The X coordinate of the table.</param>
+/// <param name="y">The Y coordinate of the table.</param>
 public readonly struct Position(int x, int y): IEquatable<Position>
 {
     public int X => x;
