@@ -53,18 +53,18 @@ The key considerations for my implementation were:
 * Separation of concerns; and
 * Decoupled components.
 
-## Testability
+### Testability
 
 It is important to test the code to verify that it works as expected. Unit tests allow for speedy feedback on the code, 
 and also help to catch bugs.
 
-## Separation of concerns
+### Separation of concerns
 
 The execution of the application is separated into different components, each with a specific responsibility. 
 Especially the user interaction: the `Controller` class provides the behaviour to ensure that input and output 
 are handled without the awareness of other components.
 
-## Decoupled components
+### Decoupled components
 
 This follows on from the preceding points: the components are decoupled from each other, 
 so that they can be developed and tested independently, reducing the risk of bugs when changes are made. 
@@ -72,3 +72,21 @@ The `Robot` class is aware of the `Table` class, but not the other way around. A
 boundaries, but a `Table` does not need to know about the `Robot`.
 
 For the reader of the code, these design decisions should reduce cognitive load when trying to understand the code.
+
+## Tools used
+
+* Visual Studio Community (Windows)
+* JetBrains Rider (Mac)
+* .NET 10.0 SDK
+* xUnit for unit testing
+* Git for version control
+* GitHub for hosting the repository
+
+## Artificial Intelligence
+
+I did use AI to assist in writing some of the code, mostly to:
+
+* Write unit tests
+* To implement the methods defined in the interface of `IEquatable<T>`
+
+See the [Prompts document](./prompts.md) for more details of the Copilot interactions.
