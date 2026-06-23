@@ -2,6 +2,7 @@
   <Folder Name="/docs/">
     <File Path="Prompts.md" />
     <File Path="README.md" />
+    <File Path="SPEC.md" />
   </Folder>
   <Folder Name="/samples/">
     <File Path="samples/example1.txt" />
