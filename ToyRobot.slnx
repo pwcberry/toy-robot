@@ -8,6 +8,7 @@
     <File Path="samples/example1.txt" />
     <File Path="samples/example2.txt" />
     <File Path="samples/example3.txt" />
+    <File Path="samples/example5.txt" />
     <File Path="samples\example4.txt" />
   </Folder>
   <Folder Name="/ToyRobot.Console/">

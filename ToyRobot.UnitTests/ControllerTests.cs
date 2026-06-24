@@ -8,7 +8,7 @@ public class ControllerTests
     public void Run_With_Example_1_Input_ReturnsCorrectReport()
     {
         // Arrange
-        using var reader = new StringReader(Example1);
+        using var reader = new StringReader(ExampleFixture1);
         using var writer = new StringWriter();
 
         var controller = new Controller(reader, writer);
@@ -26,7 +26,7 @@ public class ControllerTests
     public void Run_With_Example_2_Input_ReturnsCorrectReport()
     {
         // Arrange
-        using var reader = new StringReader(Example2);
+        using var reader = new StringReader(ExampleFixture2);
         using var writer = new StringWriter();
         var controller = new Controller(reader, writer);
 
@@ -43,7 +43,7 @@ public class ControllerTests
     public void Run_With_Example_3_Input_ReturnsCorrectReport()
     {
         // Arrange
-        using var reader = new StringReader(Example3);
+        using var reader = new StringReader(ExampleFixture3);
         using var writer = new StringWriter();
         var controller = new Controller(reader, writer);
 
@@ -125,7 +125,37 @@ public class ControllerTests
         Assert.Contains("0,0,NORTH", output);
     }
 
-    private static readonly string Example1 = """
+    [Fact]
+    public void Run_IgnoresCommandsBeforeFirstPlace()
+    {
+        // Arrange
+        using var reader = new StringReader(IgnoreBeforePlaceFixture);
+        using var writer = new StringWriter();
+        var controller = new Controller(reader, writer);
+
+        // Act
+        controller.Run();
+
+        // Assert
+        Assert.Equal("0,0,NORTH" + Environment.NewLine, writer.ToString());
+    }
+
+    [Fact]
+    public void Run_StillProcessesCommandsAfterFirstPlace()
+    {
+        // Arrange
+        using var reader = new StringReader(ProcessAfterPlaceFixture);
+        using var writer = new StringWriter();
+        var controller = new Controller(reader, writer);
+
+        // Act
+        controller.Run();
+
+        // Assert
+        Assert.Equal("2,1,EAST" + Environment.NewLine, writer.ToString());
+    }
+
+    private static readonly string ExampleFixture1 = """
         PLACE 0,0,NORTH
         MOVE 
         REPORT 
@@ -133,7 +163,7 @@ public class ControllerTests
 
     private static readonly string Report1 = "0,1,NORTH";
 
-    private static readonly string Example2 = """
+    private static readonly string ExampleFixture2 = """
         PLACE 0,0,NORTH
         LEFT 
         REPORT 
@@ -141,7 +171,7 @@ public class ControllerTests
 
     private static readonly string Report2 = "0,0,WEST";
 
-    private static readonly string Example3 = """
+    private static readonly string ExampleFixture3 = """
         PLACE 1,2,EAST
         MOVE 
         MOVE 
@@ -151,4 +181,21 @@ public class ControllerTests
         """;
 
     private static readonly string Report3 = "3,3,NORTH";
+
+    private static readonly string IgnoreBeforePlaceFixture = """
+        MOVE 
+        LEFT 
+        RIGHT 
+        REPORT 
+        PLACE 0,0,NORTH
+        REPORT 
+        """;
+
+    private static readonly string ProcessAfterPlaceFixture = """
+        JUMP 
+        REPORT 
+        PLACE 1,1,EAST
+        MOVE 
+        REPORT 
+        """;
 }

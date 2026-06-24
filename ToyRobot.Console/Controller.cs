@@ -6,6 +6,7 @@
 /// <param name="input">The input stream for reading user commands.</param>
 /// <param name="output">The output stream for writing responses and status messages.</param>
 public class Controller(TextReader input, TextWriter output)
+
 {
     public void Run()
     {
@@ -18,6 +19,12 @@ public class Controller(TextReader input, TextWriter output)
             var line = input.ReadLine() ?? string.Empty;
             var action = InputParser.Parse(line);
 
+            // Do not execute any command other than PLACE until the robot has been placed on the table
+            if (robot.Placement.IsNowhere && action.Command != Command.Place)
+            {
+                continue;
+            }
+    
             switch (action.Command)
             {
                 case Command.Place:
@@ -50,7 +57,7 @@ public class Controller(TextReader input, TextWriter output)
     {
         if (placement.IsNowhere)
         {
-            output.WriteLine("Invalid PLACE command: missing arguments");
+            output.WriteLine("Invalid PLACE command");
             return;
         }
 

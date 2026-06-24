@@ -1,6 +1,6 @@
 # Toy Robot
 
-My submission for the Toy Robot exercise.
+My submission for the Toy Robot exercise based on [these specs](./SPEC.md).
 
 ## Build
 
@@ -13,7 +13,7 @@ dotnet build
 
 ## Run
 
-I have added an example input file in `samples/example4.txt`. To run the application with this input file, run either 
+I have added example input files in the `samples` folder. To run the application with one of these input files, run either 
 of the following commands from the solution root directory:
 
 ```powershell
@@ -26,8 +26,8 @@ Or on Linux/Mac:
 cat ./samples/example4.txt | dotnet run --project ./ToyRobot.Console/ToyRobot.Console.csproj
 ```
 
-The result of the `REPORT` command is `0,0,EAST`.
-
+The result of the `REPORT` command for this example is `0,0,EAST`.
+ 
 It is also possible to run the application interactively from the console or CLI. 
 To do this, run the following command from the solution root directory:
 

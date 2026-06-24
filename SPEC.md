@@ -14,8 +14,8 @@
 ## Rules
 
 1. The toy robot must not fall off the table during movement. This also includes the initial placement of the toy robot. Any move that would cause the robot to fall must be ignored
-2. The first valid command to the robot is a PLACE command, after that, any sequence of commands may be issued, in any order, including another PLACE command. The application should discard all commands in the sequence until a valid PLACE command has been executed
-3. The origin (0,0) can be considered to be the SOUTH WEST most corner
-4. A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands
+2. The first valid command to the robot is a PLACE command, after that, any sequence of commands may be issued, in any order, including another PLACE command
+3. A robot that is not on the table can choose to ignore the MOVE, LEFT, RIGHT and REPORT commands
+4. The origin (0,0) can be considered to be the SOUTH WEST most corner
 5. Input can be from a file, or from standard input
 6. No obstructions are present on the table surface
