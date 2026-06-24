@@ -2,7 +2,7 @@ namespace ToyRobot.Console;
 
 public class RobotAction
 {
-    public RobotAction(Command command) : this(command, Placement.Empty)
+    public RobotAction(Command command) : this(command, Placement.Nowhere)
     {
     }
 

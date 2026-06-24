@@ -19,7 +19,7 @@ public static class InputParser
         };
 
         return !arguments.Contains(',') ?
-            new RobotAction(command, Placement.Empty) :
+            new RobotAction(command, Placement.Nowhere) :
             new RobotAction(command, Placement.Parse(arguments));
     }
 }

@@ -62,9 +62,9 @@ public class ControllerTests
         // Arrange
         var input = """
             PLACE 2,2,SOUTH
-            MOVE
-            MOVE
-            QUIT
+            MOVE 
+            MOVE 
+            QUIT 
             """;
         using var reader = new StringReader(input);
         using var writer = new StringWriter();
@@ -86,9 +86,9 @@ public class ControllerTests
         // Arrange
         var input = """
             PLACE 2,2,SOUTH
-            MOVE
-            REPORT
-            QUIT
+            MOVE 
+            REPORT 
+            QUIT 
             """;
         using var reader = new StringReader(input);
         using var writer = new StringWriter();
@@ -109,42 +109,45 @@ public class ControllerTests
         // Arrange
         var input = """
             PLACE 0,0,NORTH
-            JUMP
-            REPORT
+            JUMP 
+            REPORT 
             """;
         using var reader = new StringReader(input);
         using var writer = new StringWriter();
         var controller = new Controller(reader, writer);
 
-        // Act & Assert
-        var exception = Record.Exception(() => controller.Run());
+        // Act
+        controller.Run();
 
-        Assert.Null(exception);
+        // Assert
+        var output = writer.ToString();
+        Assert.Contains("Invalid Action: Invalid Placement", output);
+        Assert.Contains("0,0,NORTH", output);
     }
 
     private static readonly string Example1 = """
         PLACE 0,0,NORTH
-        MOVE
-        REPORT
+        MOVE 
+        REPORT 
         """;
 
     private static readonly string Report1 = "0,1,NORTH";
 
     private static readonly string Example2 = """
         PLACE 0,0,NORTH
-        LEFT
-        REPORT
+        LEFT 
+        REPORT 
         """;
 
     private static readonly string Report2 = "0,0,WEST";
 
     private static readonly string Example3 = """
         PLACE 1,2,EAST
-        MOVE
-        MOVE
-        LEFT
-        MOVE
-        REPORT
+        MOVE 
+        MOVE 
+        LEFT 
+        MOVE 
+        REPORT 
         """;
 
     private static readonly string Report3 = "3,3,NORTH";

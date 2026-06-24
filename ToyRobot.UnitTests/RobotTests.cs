@@ -5,7 +5,7 @@ namespace ToyRobot.UnitTests;
 public class RobotTests
 {
     [Fact]
-    public void DefaultInstance_AtOrigin_FacingNorth()
+    public void Constructor_WithTable_InitializesNowherePlacement()
     {
         // Arrange
         var table = new Table();
@@ -14,9 +14,8 @@ public class RobotTests
         var robot = new Robot(table);
 
         // Assert
-        Assert.Equal(0, robot.Position.X);
-        Assert.Equal(0, robot.Position.Y);
-        Assert.Equal(Direction.North, robot.Facing);
+        Assert.Same(table, robot.Table);
+        Assert.Equal(Placement.Nowhere, robot.Placement);
     }
 
     [Theory]
@@ -26,13 +25,17 @@ public class RobotTests
     [InlineData(5, 2)]
     [InlineData(2, 6)]
     [InlineData(6, 5)]
-    public void Constructor_Throws_WhenOutOfBounds(int x, int y)
+    public void Place_OutOfBounds_DoesNotChangePlacement(int x, int y)
     {
         // Arrange
         var table = new Table();
+        var robot = new Robot(table);
 
         // Act
-        Assert.Throws<OutOfBoundsException>(() => new Robot(table, new Position(x, y), Direction.North));
+        robot.Place(x, y, Direction.North);
+
+        // Assert
+        Assert.Equal(Placement.Nowhere, robot.Placement);
     }
 
     [Theory]
@@ -40,7 +43,7 @@ public class RobotTests
     [InlineData(1, 2, Direction.West)]
     [InlineData(2, 4, Direction.South)]
     [InlineData(4, 2, Direction.North)]
-    public void Place_InBounds_DoesNotThrow(int x, int y, Direction facing)
+    public void Place_InBounds_UpdatesPlacement(int x, int y, Direction facing)
     {
         // Arrange
         var table = new Table();
@@ -50,24 +53,7 @@ public class RobotTests
         robot.Place(x, y, facing);
 
         // Assert
-        Assert.Equal(robot.Position.X, x);
-        Assert.Equal(robot.Position.Y, y);
-        Assert.Equal(robot.Facing, facing);
-    }
-
-    [Theory]
-    [InlineData(-1, 0, Direction.East)]
-    [InlineData(1, -2, Direction.West)]
-    [InlineData(6, 4, Direction.South)]
-    [InlineData(5, 6, Direction.North)]
-    public void Place_OutOfBounds_Throws(int x, int y, Direction facing)
-    {
-        // Arrange
-        var table = new Table();
-        var robot = new Robot(table);
-
-        // Act
-        Assert.Throws<OutOfBoundsException>(() => robot.Place(x, y, facing));
+        Assert.Equal(new Placement(x, y, facing), robot.Placement);
     }
 
     [Fact]
@@ -75,13 +61,13 @@ public class RobotTests
     {
         // Arrange
         var table = new Table();
-        var robot = new Robot(table);
+        var robot = new Robot(table, new Placement(1, 1, Direction.North));
 
         // Act
         robot.TurnLeft();
 
         // Assert
-        Assert.Equal(Direction.West, robot.Facing);
+        Assert.Equal(Direction.West, robot.Placement.Facing);
     }
 
     [Fact]
@@ -89,13 +75,13 @@ public class RobotTests
     {
         // Arrange
         var table = new Table();
-        var robot = new Robot(table, Position.Origin, Direction.West);
+        var robot = new Robot(table, new Placement(1, 1, Direction.West));
 
         // Act
         robot.TurnLeft();
 
         // Assert
-        Assert.Equal(Direction.South, robot.Facing);
+        Assert.Equal(Direction.South, robot.Placement.Facing);
     }
 
     [Fact]
@@ -103,13 +89,13 @@ public class RobotTests
     {
         // Arrange
         var table = new Table();
-        var robot = new Robot(table, Position.Origin, Direction.South);
+        var robot = new Robot(table, new Placement(1, 1, Direction.South));
 
         // Act
         robot.TurnLeft();
 
         // Assert
-        Assert.Equal(Direction.East, robot.Facing);
+        Assert.Equal(Direction.East, robot.Placement.Facing);
     }
 
     [Fact]
@@ -117,13 +103,13 @@ public class RobotTests
     {
         // Arrange
         var table = new Table();
-        var robot = new Robot(table, Position.Origin, Direction.East);
+        var robot = new Robot(table, new Placement(1, 1, Direction.East));
 
         // Act
         robot.TurnLeft();
 
         // Assert
-        Assert.Equal(Direction.North, robot.Facing);
+        Assert.Equal(Direction.North, robot.Placement.Facing);
     }
 
     [Fact]
@@ -131,13 +117,13 @@ public class RobotTests
     {
         // Arrange
         var table = new Table();
-        var robot = new Robot(table, Position.Origin, Direction.North);
+        var robot = new Robot(table, new Placement(1, 1, Direction.North));
 
         // Act
         robot.TurnRight();
 
         // Assert
-        Assert.Equal(Direction.East, robot.Facing);
+        Assert.Equal(Direction.East, robot.Placement.Facing);
     }
 
     [Fact]
@@ -145,13 +131,13 @@ public class RobotTests
     {
         // Arrange
         var table = new Table();
-        var robot = new Robot(table, Position.Origin, Direction.East);
+        var robot = new Robot(table, new Placement(1, 1, Direction.East));
 
         // Act
         robot.TurnRight();
 
         // Assert
-        Assert.Equal(Direction.South, robot.Facing);
+        Assert.Equal(Direction.South, robot.Placement.Facing);
     }
 
     [Fact]
@@ -159,13 +145,13 @@ public class RobotTests
     {
         // Arrange
         var table = new Table();
-        var robot = new Robot(table, Position.Origin, Direction.South);
+        var robot = new Robot(table, new Placement(1, 1, Direction.South));
 
         // Act
         robot.TurnRight();
 
         // Assert
-        Assert.Equal(Direction.West, robot.Facing);
+        Assert.Equal(Direction.West, robot.Placement.Facing);
     }
 
     [Fact]
@@ -173,35 +159,36 @@ public class RobotTests
     {
         // Arrange
         var table = new Table();
-        var robot = new Robot(table, Position.Origin, Direction.West);
+        var robot = new Robot(table, new Placement(1, 1, Direction.West));
 
         // Act
         robot.TurnRight();
 
         // Assert
-        Assert.Equal(Direction.North, robot.Facing);
+        Assert.Equal(Direction.North, robot.Placement.Facing);
     }
 
     [Theory]
-    [InlineData(2, 0, Direction.North)]
-    [InlineData(0, 2, Direction.East)]
-    [InlineData(2, 4, Direction.South)]
-    [InlineData(4, 2, Direction.West)]
-    [InlineData(2, 2, Direction.North)]
-    [InlineData(1, 1, Direction.West)]
-    [InlineData(3, 3, Direction.East)]
-    [InlineData(3, 2, Direction.South)]
-    public void Move_AwayFromBoundary_IsSuccessful(int x, int y, Direction facing)
+    [InlineData(2, 0, Direction.North, 2, 1)]
+    [InlineData(0, 2, Direction.East, 1, 2)]
+    [InlineData(2, 4, Direction.South, 2, 3)]
+    [InlineData(4, 2, Direction.West, 3, 2)]
+    [InlineData(2, 2, Direction.North, 2, 3)]
+    [InlineData(1, 1, Direction.West, 0, 1)]
+    [InlineData(3, 3, Direction.East, 4, 3)]
+    [InlineData(3, 2, Direction.South, 3, 1)]
+    public void Move_AwayFromBoundary_IsSuccessful(int x, int y, Direction facing, int expectedX, int expectedY)
     {
         // Arrange
         var table = new Table();
-        var robot = new Robot(table, new Position(x, y), facing);
+        var robot = new Robot(table, new Placement(x, y, facing));
 
         // Act
         var result = robot.Move();
 
         // Assert
         Assert.True(result);
+        Assert.Equal(new Placement(expectedX, expectedY, facing), robot.Placement);
     }
 
     [Theory]
@@ -213,12 +200,27 @@ public class RobotTests
     {
         // Arrange
         var table = new Table();
-        var robot = new Robot(table, new Position(x, y), facing);
+        var robot = new Robot(table, new Placement(x, y, facing));
 
         // Act
         var result = robot.Move();
 
         // Assert
         Assert.False(result);
+        Assert.Equal(new Placement(x, y, facing), robot.Placement);
+    }
+
+    [Fact]
+    public void ToString_Returns_CurrentPlacement()
+    {
+        // Arrange
+        var table = new Table();
+        var robot = new Robot(table, new Placement(2, 3, Direction.West));
+
+        // Act
+        var result = robot.ToString();
+
+        // Assert
+        Assert.Equal("2,3,WEST", result);
     }
 }

@@ -33,15 +33,15 @@ public class PlacementTests
     }
 
     [Fact]
-    public void Empty_HasCorrectValues()
+    public void Nowhere_HasCorrectValues()
     {
         // Arrange & Act
-        var empty = Placement.Empty;
+        var empty = Placement.Nowhere;
 
         // Assert
         Assert.Equal(-1, empty.X);
         Assert.Equal(-1, empty.Y);
-        Assert.Equal(Direction.South, empty.Facing);
+        Assert.Equal(Direction.North, empty.Facing);
     }
 
     [Fact]
@@ -102,53 +102,68 @@ public class PlacementTests
     }
 
     [Fact]
-    public void Parse_WithInvalidDirection_ThrowsArgumentException()
+    public void Parse_WithInvalidDirection_ReturnsNowhere()
     {
         // Arrange
         var input = "1,2,INVALID";
 
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => Placement.Parse(input));
+        // Act
+        var placement = Placement.Parse(input);
+
+        // Assert
+        Assert.Equal(Placement.Nowhere, placement);
     }
 
     [Fact]
-    public void Parse_WithInvalidXCoordinate_ThrowsArgumentException()
+    public void Parse_WithInvalidXCoordinate_ReturnsNowhere()
     {
         // Arrange
         var input = "abc,2,NORTH";
 
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => Placement.Parse(input));
+        // Act
+        var placement = Placement.Parse(input);
+
+        // Assert
+        Assert.Equal(Placement.Nowhere, placement);
     }
 
     [Fact]
-    public void Parse_WithInvalidYCoordinate_ThrowsArgumentException()
+    public void Parse_WithInvalidYCoordinate_ReturnsNowhere()
     {
         // Arrange
         var input = "1,xyz,NORTH";
 
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => Placement.Parse(input));
+        // Act
+        var placement = Placement.Parse(input);
+
+        // Assert
+        Assert.Equal(Placement.Nowhere, placement);
     }
 
     [Fact]
-    public void Parse_WithTooFewParts_ThrowsArgumentException()
+    public void Parse_WithTooFewParts_ReturnsNowhere()
     {
         // Arrange
         var input = "1,NORTH";
 
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => Placement.Parse(input));
+        // Act
+        var placement = Placement.Parse(input);
+
+        // Assert
+        Assert.Equal(Placement.Nowhere, placement);
     }
 
     [Fact]
-    public void Parse_WithTooManyParts_ThrowsArgumentException()
+    public void Parse_WithTooManyParts_ReturnsNowhere()
     {
         // Arrange
         var input = "1,2,NORTH,EXTRA";
 
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => Placement.Parse(input));
+        // Act
+        var placement = Placement.Parse(input);
+
+        // Assert
+        Assert.Equal(Placement.Nowhere, placement);
     }
 
     [Fact]
@@ -199,53 +214,68 @@ public class PlacementTests
     }
 
     [Fact]
-    public void Parse_WithArrayInputInvalidDirection_ThrowsArgumentException()
+    public void Parse_WithArrayInputInvalidDirection_ReturnsNowhere()
     {
         // Arrange
         var input = new[] { "1", "2", "INVALID" };
 
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => Placement.Parse(input));
+        // Act
+        var placement = Placement.Parse(input);
+
+        // Assert
+        Assert.Equal(Placement.Nowhere, placement);
     }
 
     [Fact]
-    public void Parse_WithArrayInputInvalidXCoordinate_ThrowsArgumentException()
+    public void Parse_WithArrayInputInvalidXCoordinate_ReturnsNowhere()
     {
         // Arrange
         var input = new[] { "notanumber", "2", "NORTH" };
 
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => Placement.Parse(input));
+        // Act
+        var placement = Placement.Parse(input);
+
+        // Assert
+        Assert.Equal(Placement.Nowhere, placement);
     }
 
     [Fact]
-    public void Parse_WithArrayInputInvalidYCoordinate_ThrowsArgumentException()
+    public void Parse_WithArrayInputInvalidYCoordinate_ReturnsNowhere()
     {
         // Arrange
         var input = new[] { "1", "notanumber", "NORTH" };
 
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => Placement.Parse(input));
+        // Act
+        var placement = Placement.Parse(input);
+
+        // Assert
+        Assert.Equal(Placement.Nowhere, placement);
     }
 
     [Fact]
-    public void Parse_WithArrayInputTooFewElements_ThrowsArgumentException()
+    public void Parse_WithArrayInputTooFewElements_ReturnsNowhere()
     {
         // Arrange
         var input = new[] { "1", "NORTH" };
 
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => Placement.Parse(input));
+        // Act
+        var placement = Placement.Parse(input);
+
+        // Assert
+        Assert.Equal(Placement.Nowhere, placement);
     }
 
     [Fact]
-    public void Parse_WithArrayInputTooManyElements_ThrowsArgumentException()
+    public void Parse_WithArrayInputTooManyElements_ReturnsNowhere()
     {
         // Arrange
         var input = new[] { "1", "2", "NORTH", "EXTRA" };
 
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => Placement.Parse(input));
+        // Act
+        var placement = Placement.Parse(input);
+
+        // Assert
+        Assert.Equal(Placement.Nowhere, placement);
     }
 
     [Fact]

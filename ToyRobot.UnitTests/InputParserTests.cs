@@ -65,7 +65,7 @@ public class InputParserTests
 
         // Assert
         Assert.Equal(Command.Move, result.Command);
-        Assert.Equal(Placement.Empty, result.Placement);
+        Assert.Equal(Placement.Nowhere, result.Placement);
     }
 
     [Fact]
@@ -79,7 +79,7 @@ public class InputParserTests
 
         // Assert
         Assert.Equal(Command.Left, result.Command);
-        Assert.Equal(Placement.Empty, result.Placement);
+        Assert.Equal(Placement.Nowhere, result.Placement);
     }
 
     [Fact]
@@ -93,7 +93,7 @@ public class InputParserTests
 
         // Assert
         Assert.Equal(Command.Right, result.Command);
-        Assert.Equal(Placement.Empty, result.Placement);
+        Assert.Equal(Placement.Nowhere, result.Placement);
     }
 
     [Fact]
@@ -107,21 +107,21 @@ public class InputParserTests
 
         // Assert
         Assert.Equal(Command.Report, result.Command);
-        Assert.Equal(Placement.Empty, result.Placement);
+        Assert.Equal(Placement.Nowhere, result.Placement);
     }
 
     [Fact]
     public void Parse_QuitCommand_ReturnsCorrectAction()
     {
         // Arrange
-        var input = "QUIT";
+        var input = "QUIT ";
 
         // Act
         var result = InputParser.Parse(input);
 
         // Assert
         Assert.Equal(Command.Quit, result.Command);
-        Assert.Equal(Placement.Empty, result.Placement);
+        Assert.Equal(Placement.Nowhere, result.Placement);
     }
 
     [Theory]
@@ -192,6 +192,6 @@ public class InputParserTests
             _ => Command.Invalid
         };
         Assert.Equal(expectedCommand, result.Command);
-        Assert.Equal(Placement.Empty, result.Placement);
+        Assert.Equal(Placement.Nowhere, result.Placement);
     }
 }

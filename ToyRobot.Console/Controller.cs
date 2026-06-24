@@ -15,57 +15,40 @@ public class Controller(TextReader input, TextWriter output)
 
         while (isRunning && input.Peek() != -1)
         {
-            try
-            {
-                var line = input.ReadLine() ?? string.Empty;
-                var action = InputParser.Parse(line);
+            var line = input.ReadLine() ?? string.Empty;
+            var action = InputParser.Parse(line);
 
-                switch (action.Command)
-                {
-                    case Command.Place:
-                        PlaceRobot(robot, action.Placement);
-                        break;
-                    case Command.Move:
-                        robot.Move();
-                        break;
-                    case Command.Left:
-                        robot.TurnLeft();
-                        break;
-                    case Command.Right:
-                        robot.TurnRight();
-                        break;
-                    case Command.Report:
-                        ReportRobotStatus(robot);
-                        break;
-                    case Command.Quit:
-                        output.WriteLine("GOODBYE");
-                        isRunning = false;
-                        break;
-                    case Command.Invalid:
-                        output.WriteLine($"Invalid {action}");
-                        break;
-                }
-            }
-            catch (OutOfBoundsException obEx)
+            switch (action.Command)
             {
-                output.WriteLine(obEx.Message);
-            }
-            catch (ArgumentException argEx)
-            {
-                output.WriteLine($"Error in placement arguments:\n{argEx.Message}");
-                isRunning = false;
-            }
-            catch (Exception ex)
-            {
-                output.WriteLine(ex.ToString());
-                isRunning = false;
+                case Command.Place:
+                    PlaceRobot(robot, action.Placement);
+                    break;
+                case Command.Move:
+                    robot.Move();
+                    break;
+                case Command.Left:
+                    robot.TurnLeft();
+                    break;
+                case Command.Right:
+                    robot.TurnRight();
+                    break;
+                case Command.Report:
+                    ReportRobotStatus(robot);
+                    break;
+                case Command.Quit:
+                    output.WriteLine("GOODBYE");
+                    isRunning = false;
+                    break;
+                case Command.Invalid:
+                    output.WriteLine($"Invalid {action}");
+                    break;
             }
         }
     }
 
     private void PlaceRobot(Robot robot, Placement placement)
     {
-        if (placement.IsEmpty)
+        if (placement.IsNowhere)
         {
             output.WriteLine("Invalid PLACE command: missing arguments");
             return;
@@ -77,6 +60,13 @@ public class Controller(TextReader input, TextWriter output)
 
     private void ReportRobotStatus(Robot robot)
     {
-        output.WriteLine(robot);
+        if (robot != null && !robot.Placement.IsNowhere)
+        {
+            output.WriteLine(robot);
+        }
+        else
+        {
+            output.WriteLine("NOWHERE");
+        }
     }
 }
